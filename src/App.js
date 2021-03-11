@@ -1,4 +1,5 @@
 import './App.css'
+import 'material-icons'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Main from './screens/Main'
 
