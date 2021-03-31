@@ -6,13 +6,13 @@ const PostCard = () => {
 		<Card>
 			<div className='shadow-lg px-2 py-3 flex items-center'>
 				<img
-					src='https://via.placeholder.com/40'
+					src='https://picsum.photos/seed/profile/40'
 					alt='sample'
 					className='rounded-full'
 				/>
 				<span className='ml-3'>Name</span>
 			</div>
-			<img src='https://via.placeholder.com/512' alt='sample' />
+			<img src='https://picsum.photos/seed/picsum/512' alt='sample' />
 			<CardBody>
 				<div className='flex flex-col'>
 					<a href='#' className='font-bold'>
