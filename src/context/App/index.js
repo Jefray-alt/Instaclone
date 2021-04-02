@@ -4,7 +4,7 @@ import reducer from './reducer'
 import { TOGGLE_NAVBAR } from './constant'
 
 const AppState = (props) => {
-	const [appState, dispatch] = useReducer(reducer, { isNavbarEnabled: false })
+	const [appState, dispatch] = useReducer(reducer, { isNavbarEnabled: true })
 
 	const toggleNavbar = (value) => {
 		dispatch({

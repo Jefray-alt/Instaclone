@@ -5,26 +5,27 @@ import Login from './screens/Login'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Home from './screens/Home'
-import AppContext from './context/App/index'
+import AppContext from './context/App/context'
+import { useContext } from 'react'
 
 const App = () => {
+	const { isNavbarEnabled } = useContext(AppContext)
+
 	return (
-		<AppContext>
-			<Router>
-				<Header />
-				<div className='my-14 flex justify-center'>
-					<div className='w-full max-w-lg'>
-						<div className='my-2'>
-							<Switch>
-								<Route path='/' exact component={Home} />
-								<Route path='/login' component={Login} />
-							</Switch>
-						</div>
+		<Router>
+			{isNavbarEnabled ? <Header /> : null}
+			<div className='my-14 flex justify-center'>
+				<div className='w-full max-w-lg'>
+					<div className='my-2'>
+						<Switch>
+							<Route path='/' exact component={Home} />
+							<Route path='/login' component={Login} />
+						</Switch>
 					</div>
 				</div>
-				<Footer />
-			</Router>
-		</AppContext>
+			</div>
+			{isNavbarEnabled ? <Footer /> : null}
+		</Router>
 	)
 }
 

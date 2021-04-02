@@ -1,5 +1,6 @@
 import { Card, CardBody } from '@windmill/react-ui'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const PostCard = () => {
 	return (
@@ -15,12 +16,12 @@ const PostCard = () => {
 			<img src='https://picsum.photos/seed/picsum/512' alt='sample' />
 			<CardBody>
 				<div className='flex flex-col'>
-					<a href='#' className='font-bold'>
+					<Link to='/' href='#' className='font-bold'>
 						11 Likes
-					</a>
-					<a href='#' className='text-gray-500'>
+					</Link>
+					<Link to='/' className='text-gray-500'>
 						View 1 comment(s)
-					</a>
+					</Link>
 				</div>
 			</CardBody>
 		</Card>
