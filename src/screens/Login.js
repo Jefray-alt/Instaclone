@@ -1,6 +1,5 @@
 import { Button, Label } from '@windmill/react-ui'
 import { useContext, useEffect } from 'react'
-import Pulse from '../components/Loader/Pulse'
 import AppContext from '../context/App/context'
 
 const Login = () => {
