@@ -1,8 +1,7 @@
 import './App.css'
 import 'material-icons'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import React, { useContext, useEffect } from 'react'
-import AppContext from './context/App/context'
+import React from 'react'
 
 /* Screen Components */
 import Login from './screens/Login'
@@ -10,18 +9,19 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Home from './screens/Home'
 import Register from './screens/Register'
-import UserContext from './context/User/context'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const App = () => {
-	const { isNavbarEnabled } = useContext(AppContext)
-	const userContext = useContext(UserContext)
+	const app = useSelector((state) => state.appOptions)
 
 	useEffect(() => {
-		console.log(userContext)
-	}, [userContext])
+		console.log(app.isNavbarEnabled)
+	}, [app.isNavbarEnabled])
+
 	return (
 		<Router>
-			{isNavbarEnabled ? <Header /> : null}
+			{app.isNavbarEnabled ? <Header /> : null}
 			<div className='my-14 flex justify-center'>
 				<div className='w-full max-w-lg'>
 					<div className='my-2'>
@@ -33,7 +33,7 @@ const App = () => {
 					</div>
 				</div>
 			</div>
-			{isNavbarEnabled ? <Footer /> : null}
+			{app.isNavbarEnabled ? <Footer /> : null}
 		</Router>
 	)
 }

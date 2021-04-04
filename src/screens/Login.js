@@ -1,15 +1,7 @@
 import { Button, Label } from '@windmill/react-ui'
-import { useContext, useEffect } from 'react'
-import AppContext from '../context/App/context'
+import React from 'react'
 
 const Login = () => {
-	const { toggleNavbar } = useContext(AppContext)
-
-	useEffect(() => {
-		toggleNavbar(false)
-		// eslint-disable-next-line
-	}, [])
-
 	return (
 		<div className='px-3'>
 			<div className='text-center mt-16'>

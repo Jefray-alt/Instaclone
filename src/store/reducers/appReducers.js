@@ -1,6 +1,6 @@
-import { TOGGLE_NAVBAR } from './constant'
+import { TOGGLE_NAVBAR } from '../constants/appConstants'
 
-const appReducer = (state, action) => {
+export const appReducer = (state = { isNavbarEnabled: true }, action) => {
 	switch (action.type) {
 		case TOGGLE_NAVBAR:
 			const newState = { ...state }
@@ -10,5 +10,3 @@ const appReducer = (state, action) => {
 			return state
 	}
 }
-
-export default appReducer
