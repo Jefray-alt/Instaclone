@@ -10,14 +10,9 @@ import Footer from './components/Footer/Footer'
 import Home from './screens/Home'
 import Register from './screens/Register'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
 const App = () => {
 	const app = useSelector((state) => state.appOptions)
-
-	useEffect(() => {
-		console.log(app.isNavbarEnabled)
-	}, [app.isNavbarEnabled])
 
 	return (
 		<Router>

@@ -4,9 +4,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 // Reducers
 import { appReducer } from './reducers/appReducers'
+import { userReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
 	appOptions: appReducer,
+	userDetails: userReducer,
 })
 
 const middleware = [thunk]

@@ -1,85 +1,122 @@
-import { Button, Input, Label } from '@windmill/react-ui'
-import React, { useEffect, useState } from 'react'
+import { Button, HelperText, Input, Label } from '@windmill/react-ui'
+import { useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useForm } from 'react-hook-form'
 
 import Pulse from '../components/Loader/Pulse'
 import { toggleNavbar } from '../store/actions/appActions'
+import { registerUser } from '../store/actions/userActions'
 
 const Register = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
 	const history = useHistory()
 	const dispatch = useDispatch()
-
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
-	const [userName, setUserName] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const userState = useSelector((state) => state.userDetails)
 
 	useEffect(() => {
 		dispatch(toggleNavbar(false))
 	}, [dispatch])
 
-	const onSubmit = (e) => {}
+	useEffect(() => {
+		if (userState.currentUser) {
+			history.push('/')
+		}
+		// eslint-disable-next-line
+	}, [userState.currentUser])
+
+	const onSubmit = (data) => {
+		dispatch(registerUser(data))
+	}
 
 	return (
 		<div className='px-3'>
 			<div className='text-center'>
 				<span className='block text-6xl font-light'>InstaClone</span>
 			</div>
-
-			<form onSubmit={onSubmit}>
-				<div className='input-group my-5'>
-					<Label>
-						<span>First Name</span>
-						<Input
-							className='input--default'
-							onChange={(e) => setFirstName(e.target.value)}
-						/>
-					</Label>
-				</div>
-				<div className='input-group my-5'>
-					<Label>
-						<span>Last Name</span>
-						<Input
-							className='input--default'
-							onChange={(e) => setLastName(e.target.value)}
-						/>
-					</Label>
-				</div>
-				<div className='input-group my-5'>
-					<Label>
-						<span>Username</span>
-						<Input
-							className='input--default'
-							onChange={(e) => setUserName(e.target.value)}
-						/>
-					</Label>
-				</div>
-				<div className='input-group my-5'>
-					<Label>
-						<span>Email</span>
-						<Input
-							type='email'
-							className='input--default'
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</Label>
-				</div>
-				<div className='input-group my-5'>
-					<Label className>
-						<span>Password</span>
-						<Input
-							type='password'
-							className='input--default'
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</Label>
-				</div>
-				<Button type='submit' block className='uppercase'>
-					register
-				</Button>
-			</form>
+			{userState.isLoading ? (
+				<Pulse />
+			) : (
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<div className='input-group my-5'>
+						<Label>
+							<span>First Name</span>
+							<Input
+								{...register('firstName', { required: true })}
+								className={
+									errors.firstName ? 'input--invalid' : 'input--default'
+								}
+							/>
+							<HelperText valid={false}>
+								{errors.firstName && 'First name is required'}
+							</HelperText>
+						</Label>
+					</div>
+					<div className='input-group my-5'>
+						<Label>
+							<span>Last Name</span>
+							<Input
+								{...register('lastName', { required: true })}
+								className={
+									errors.lastName ? 'input--invalid' : 'input--default'
+								}
+							/>
+							<HelperText valid={false}>
+								{errors.lastName && 'Last name is required'}
+							</HelperText>
+						</Label>
+					</div>
+					<div className='input-group my-5'>
+						<Label>
+							<span>Username</span>
+							<Input
+								{...register('userName', { required: true })}
+								className={
+									errors.userName ? 'input--invalid' : 'input--default'
+								}
+							/>
+							<HelperText valid={false}>
+								{errors.userName && 'Username is required'}
+							</HelperText>
+						</Label>
+					</div>
+					<div className='input-group my-5'>
+						<Label>
+							<span>Email</span>
+							<Input
+								{...register('email', { required: true })}
+								type='email'
+								className={errors.email ? 'input--invalid' : 'input--default'}
+							/>
+							<HelperText valid={false}>
+								{errors.email && 'Email is required'}
+							</HelperText>
+						</Label>
+					</div>
+					<div className='input-group my-5'>
+						<Label className>
+							<span>Password</span>
+							<Input
+								type='password'
+								{...register('password', { required: true })}
+								className={
+									errors.password ? 'input--invalid' : 'input--default'
+								}
+							/>
+							<HelperText valid={false}>
+								{errors.password && 'Password is required'}
+							</HelperText>
+						</Label>
+					</div>
+					<Button type='submit' block className='uppercase'>
+						register
+					</Button>
+				</form>
+			)}
 		</div>
 	)
 }
